@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://erencanacioglu.vercel.app/sitemap.xml',
+    sitemap: 'https://erencanacioglu.com/sitemap.xml',
   }
 }

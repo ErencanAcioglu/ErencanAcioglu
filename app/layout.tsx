@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: 'Erencan Acıoğlu - Full Stack Developer',
   description: 'Full Stack Developer specializing in web, mobile, and AI technologies. Building innovative applications with React, Node.js, Python, Unity, and modern development tools.',
   keywords: ['Erencan Acıoğlu', 'Full Stack Developer', 'React', 'Node.js', 'Python', 'AI', 'Web Development', 'Software Engineer', 'Mobile Development', 'Game Development', 'Machine Learning', 'TypeScript', 'Next.js'],
-  authors: [{ name: 'Erencan Acıoğlu', url: 'https://erencanacioglu.vercel.app' }],
+  authors: [{ name: 'Erencan Acıoğlu', url: 'https://erencanacioglu.com' }],
   creator: 'Erencan Acıoğlu',
   publisher: 'Erencan Acıoğlu',
   robots: {
