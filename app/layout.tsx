@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   description: 'Full Stack Developer specializing in web, mobile, and AI technologies. Building innovative applications with React, Node.js, Python, Unity, and modern development tools.',
   keywords: ['Erencan Acıoğlu', 'Full Stack Developer', 'React', 'Node.js', 'Python', 'AI', 'Web Development', 'Software Engineer'],
   authors: [{ name: 'Erencan Acıoğlu' }],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/logo.svg',
+  },
   openGraph: {
     title: 'Erencan Acıoğlu - Full Stack Developer',
     description: 'Full Stack Developer specializing in web, mobile, and AI technologies',
