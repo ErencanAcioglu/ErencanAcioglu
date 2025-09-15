@@ -81,7 +81,7 @@ const Navbar = () => {
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
-          <div className="py-4 space-y-2">
+          <div className="py-4 space-y-2 bg-dark-900/95 backdrop-blur-lg border-t border-dark-700">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = pathname === item.href
