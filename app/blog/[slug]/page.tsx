@@ -415,7 +415,7 @@ Bu optimizasyonlarla uygulamanızın performansını önemli ölçüde artırabi
               <div 
                 className="blog-content"
                 dangerouslySetInnerHTML={{ 
-                  __html: post.content.replace(/\n/g, '<br>').replace(/```(.*?)```/gs, '<pre class="code-block"><code>$1</code></pre>').replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>') 
+                  __html: post.content.replace(/\n/g, '<br>').replace(/```([\s\S]*?)```/g, '<pre class="code-block"><code>$1</code></pre>').replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>') 
                 }} 
               />
             </div>
