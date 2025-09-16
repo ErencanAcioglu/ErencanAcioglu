@@ -23,6 +23,7 @@ import {
   Terminal,
   Cpu
 } from 'lucide-react'
+import InteractiveTerminal from './components/InteractiveTerminal'
 
 const HomePage = () => {
   const [currentRole, setCurrentRole] = useState(0)
@@ -277,20 +278,9 @@ const HomePage = () => {
                 </div>
               </div>
               
-              {/* Enhanced Dynamic Role with Terminal Effect */}
-              <div className="h-20 flex items-center justify-center relative">
-                <div className="bg-dark-800/50 backdrop-blur-sm rounded-lg px-6 py-3 border border-primary-500/20 animate-glow">
-                  <div className="flex items-center space-x-2">
-                    <Terminal className="w-5 h-5 text-green-400 animate-pulse" />
-                    <span className="text-green-400 font-mono text-sm animate-blink">$</span>
-                    <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 font-light">
-                      <span className="typewriter text-primary-400 font-semibold animate-fade-in-scale">
-                        {isClient ? (typingText || roles[currentRole]) : roles[currentRole]}
-                      </span>
-                      <span className={`text-primary-400 ${showCursor ? 'opacity-100' : 'opacity-0'} animate-blink`}>|</span>
-                    </p>
-                  </div>
-                </div>
+              {/* Interactive Terminal */}
+              <div className="mt-8">
+                <InteractiveTerminal />
               </div>
             </div>
 
@@ -304,31 +294,6 @@ const HomePage = () => {
                 <span className="text-primary-400 font-semibold">Full-stack çözümler</span> ve <span className="text-primary-400 font-semibold">yaratıcı projeler</span> üretiyorum.
               </p>
               
-              {/* Enhanced Live Coding Preview */}
-              <div className="mt-8 bg-dark-800/30 backdrop-blur-sm rounded-xl p-4 border border-primary-500/20 max-w-2xl mx-auto animate-fade-in-scale animate-glow">
-                <div className="flex items-center space-x-2 mb-3">
-                  <div className="flex space-x-1">
-                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
-                  </div>
-                  <span className="text-gray-400 text-sm font-mono animate-blink">Terminal</span>
-                </div>
-                <div className="text-left font-mono text-sm space-y-1">
-                  <div className="text-green-400 animate-fade-in-up" style={{animationDelay: '0.5s'}}>
-                    <span className="text-gray-500">const</span> developer = <span className="text-yellow-400">'Erencan'</span>;
-                  </div>
-                  <div className="text-blue-400 animate-fade-in-up" style={{animationDelay: '0.7s'}}>
-                    <span className="text-gray-500">function</span> createAmazing() <span className="text-gray-500">{'{'}</span>
-                  </div>
-                  <div className="text-purple-400 ml-4 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
-                    <span className="text-gray-500">return</span> <span className="text-yellow-400">'Innovation'</span>;
-                  </div>
-                  <div className="text-blue-400 animate-fade-in-up" style={{animationDelay: '1.1s'}}>
-                    <span className="text-gray-500">{'}'}</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Enhanced CTA Buttons with 3D Effects */}
