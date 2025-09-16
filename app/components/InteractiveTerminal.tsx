@@ -33,7 +33,6 @@ const InteractiveTerminal = () => {
         '  contact       - İletişim bilgilerini gösterir',
         '  neofetch      - Sistem bilgilerini gösterir',
         '  fortune       - Rastgele bir söz gösterir',
-        '  matrix        - Matrix efekti başlatır',
         '  clear         - Terminali temizler',
         '  exit          - Terminali kapatır'
       ]
@@ -162,16 +161,6 @@ const InteractiveTerminal = () => {
         return [fortunes[Math.floor(Math.random() * fortunes.length)]]
       }
     },
-    matrix: {
-      description: 'Matrix efekti başlatır',
-      execute: () => [
-        'Matrix efekti başlatılıyor...',
-        '01001000 01100101 01101100 01101100 01101111',
-        '01010111 01101111 01110010 01101100 01100100',
-        'Matrix rain efekti aktif!',
-        'Çıkmak için herhangi bir tuşa basın...'
-      ]
-    },
     clear: {
       description: 'Terminali temizler',
       execute: () => []
@@ -181,7 +170,7 @@ const InteractiveTerminal = () => {
   // Terminal başlangıç mesajı
   useEffect(() => {
     const welcomeMessage = [
-      { type: 'output' as const, content: 'Erencan Acıoğlu Terminal v1.0.0' },
+      { type: 'output' as const, content: 'Terminal v1.0.0' },
       { type: 'output' as const, content: 'Type "help" for available commands.' },
       { type: 'output' as const, content: '' }
     ]
@@ -287,7 +276,7 @@ const InteractiveTerminal = () => {
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <span className="text-green-400 font-mono text-sm">Erencan Terminal</span>
+          <span className="text-green-400 font-mono text-sm">Terminal</span>
         </div>
         <div className="flex items-center space-x-2">
           <Terminal className="w-4 h-4 text-green-400" />

@@ -278,10 +278,6 @@ const HomePage = () => {
                 </div>
               </div>
               
-              {/* Interactive Terminal */}
-              <div className="mt-8">
-                <InteractiveTerminal />
-              </div>
             </div>
 
             {/* Enhanced Description with Live Coding Preview */}
@@ -294,6 +290,10 @@ const HomePage = () => {
                 <span className="text-primary-400 font-semibold">Full-stack çözümler</span> ve <span className="text-primary-400 font-semibold">yaratıcı projeler</span> üretiyorum.
               </p>
               
+              {/* Interactive Terminal */}
+              <div className="mt-8">
+                <InteractiveTerminal />
+              </div>
             </div>
 
             {/* Enhanced CTA Buttons with 3D Effects */}
