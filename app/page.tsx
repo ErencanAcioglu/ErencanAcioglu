@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { 
   Code, 
@@ -18,12 +18,22 @@ import {
   Zap,
   Coffee,
   Star,
-  Smartphone
+  Smartphone,
+  Sparkles,
+  Terminal,
+  Cpu
 } from 'lucide-react'
 
 const HomePage = () => {
   const [currentRole, setCurrentRole] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, speed: number, color: string}>>([])
+  const [showCursor, setShowCursor] = useState(true)
+  const [isClient, setIsClient] = useState(false)
+  const [typingText, setTypingText] = useState('')
+  const [currentTypingIndex, setCurrentTypingIndex] = useState(0)
+  const heroRef = useRef<HTMLDivElement>(null)
 
   const roles = [
     'Full Stack Developer',
@@ -48,6 +58,97 @@ const HomePage = () => {
     { label: 'Technologies Mastered', value: '15+', icon: Star },
     { label: 'Coffee Consumed', value: '1000+', icon: Coffee }
   ]
+
+  // Client-side detection
+  useEffect(() => {
+    setIsClient(true)
+    // Start typing animation immediately
+    setTypingText('')
+    setCurrentTypingIndex(0)
+  }, [])
+
+  // Enhanced Particle system with colors - Fixed for hydration
+  useEffect(() => {
+    if (!isClient) return
+    
+    const generateParticles = () => {
+      const newParticles = []
+      const colors = ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444']
+      for (let i = 0; i < 15; i++) {
+        newParticles.push({
+          id: i,
+          x: (i * 50) % window.innerWidth,
+          y: (i * 30) % window.innerHeight,
+          size: 2 + (i % 3),
+          speed: 0.3 + (i % 3) * 0.2,
+          color: colors[i % colors.length]
+        })
+      }
+      setParticles(newParticles)
+    }
+
+    generateParticles()
+  }, [isClient])
+
+  // Typing animation for roles - Fixed speed
+  useEffect(() => {
+    if (!isClient) return
+    
+    const currentRoleText = roles[currentRole]
+    if (currentTypingIndex < currentRoleText.length) {
+      const timeout = setTimeout(() => {
+        setTypingText(currentRoleText.slice(0, currentTypingIndex + 1))
+        setCurrentTypingIndex(prev => prev + 1)
+      }, 50) // Faster typing
+      return () => clearTimeout(timeout)
+    } else {
+      const timeout = setTimeout(() => {
+        setCurrentRole((prev) => (prev + 1) % roles.length)
+        setCurrentTypingIndex(0)
+        setTypingText('')
+      }, 1500) // Shorter wait time
+      return () => clearTimeout(timeout)
+    }
+  }, [currentTypingIndex, currentRole, isClient, roles])
+
+  // Cursor blink effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowCursor(prev => !prev)
+    }, 500)
+    return () => clearInterval(interval)
+  }, [])
+
+  // Mouse tracking
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
+  // Enhanced Particle animation with mouse interaction
+  useEffect(() => {
+    const animateParticles = () => {
+      setParticles(prev => prev.map(particle => {
+        const dx = mousePosition.x - particle.x
+        const dy = mousePosition.y - particle.y
+        const distance = Math.sqrt(dx * dx + dy * dy)
+        const force = Math.max(0, 100 - distance) / 100
+        
+        return {
+          ...particle,
+          y: particle.y + particle.speed + (dy * force * 0.01),
+          x: particle.x + Math.sin(particle.y * 0.01) * 0.5 + (dx * force * 0.01)
+        }
+      }).filter(particle => particle.y < window.innerHeight + 50))
+    }
+
+    const interval = setInterval(animateParticles, 30)
+    return () => clearInterval(interval)
+  }, [mousePosition])
 
   const featuredProjects = [
     {
@@ -81,77 +182,197 @@ const HomePage = () => {
   }, [])
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 relative overflow-hidden">
+      {/* Enhanced Animated Background Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute rounded-full animate-pulse"
+            style={{
+              left: particle.x,
+              top: particle.y,
+              width: particle.size,
+              height: particle.size,
+              backgroundColor: particle.color,
+              opacity: 0.6,
+              boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`,
+              animationDelay: `${particle.id * 0.05}s`,
+              animationDuration: `${1.5 + particle.speed}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Floating Tech Icons */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 animate-float">
+          <Code className="w-8 h-8 text-primary-400/30" />
+        </div>
+        <div className="absolute top-40 right-20 animate-float-delayed">
+          <Brain className="w-6 h-6 text-purple-400/30" />
+        </div>
+        <div className="absolute bottom-40 left-20 animate-float">
+          <Server className="w-7 h-7 text-green-400/30" />
+        </div>
+        <div className="absolute bottom-20 right-10 animate-float-delayed">
+          <Smartphone className="w-6 h-6 text-blue-400/30" />
+        </div>
+        <div className="absolute top-60 left-1/2 animate-float">
+          <Database className="w-5 h-5 text-yellow-400/30" />
+        </div>
+      </div>
+
+      {/* Subtle Mouse Follower Glow */}
+      <div 
+        className="fixed pointer-events-none z-10 w-64 h-64 rounded-full opacity-20 blur-2xl transition-all duration-300"
+        style={{
+          left: mousePosition.x - 128,
+          top: mousePosition.y - 128,
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%)'
+        }}
+      />
+      
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16">
+      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 z-20">
         <div className="max-w-7xl mx-auto text-center">
           <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold">
-                <span className="block text-white mb-2">Merhaba, Ben</span>
-                <span className="block gradient-text" itemProp="name">Erencan Acıoğlu</span>
-              </h1>
-              
-              {/* Dynamic Role */}
-              <div className="h-16 flex items-center justify-center">
-                <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 font-light">
-                  <span className="typewriter text-primary-400 font-semibold">
-                    {roles[currentRole]}
+            {/* Enhanced Main Heading */}
+            <div className="space-y-6">
+              <div className="relative">
+                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold">
+                  <span 
+                    className="block mb-4 animate-fade-in-up font-bold text-4xl sm:text-5xl lg:text-6xl gradient-text"
+                    style={{
+                      background: 'linear-gradient(-45deg, #ffffff, #e5e7eb, #d1d5db)',
+                      backgroundSize: '400% 400%',
+                      textShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}
+                  >
+                    Merhaba, Ben
                   </span>
-                </p>
+                  <span 
+                    className="block gradient-text animate-gradient-x animate-fade-in-scale" 
+                    itemProp="name"
+                    style={{
+                      background: 'linear-gradient(-45deg, #3b82f6, #8b5cf6, #06b6d4, #10b981, #f59e0b)',
+                      backgroundSize: '400% 400%',
+                      textShadow: '0 0 30px rgba(59, 130, 246, 0.5)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}
+                  >
+                    Erencan Acıoğlu
+                  </span>
+                </h1>
+                
+                {/* Sparkle Effect */}
+                <div className="absolute -top-2 -right-2 animate-sparkle">
+                  <Sparkles className="w-8 h-8 text-yellow-400" />
+                </div>
+              </div>
+              
+              {/* Enhanced Dynamic Role with Terminal Effect */}
+              <div className="h-20 flex items-center justify-center relative">
+                <div className="bg-dark-800/50 backdrop-blur-sm rounded-lg px-6 py-3 border border-primary-500/20 animate-glow">
+                  <div className="flex items-center space-x-2">
+                    <Terminal className="w-5 h-5 text-green-400 animate-pulse" />
+                    <span className="text-green-400 font-mono text-sm animate-blink">$</span>
+                    <p className="text-xl sm:text-2xl lg:text-3xl text-gray-300 font-light">
+                      <span className="typewriter text-primary-400 font-semibold animate-fade-in-scale">
+                        {isClient ? (typingText || roles[currentRole]) : roles[currentRole]}
+                      </span>
+                      <span className={`text-primary-400 ${showCursor ? 'opacity-100' : 'opacity-0'} animate-blink`}>|</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Description */}
-            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed" itemProp="description">
-              <span className="text-primary-400 font-semibold" itemProp="jobTitle">Full Stack Developer</span> olarak 
-              <span className="text-primary-400 font-semibold"> web, mobile ve AI</span> teknolojileriyle 
-              modern uygulamalar geliştiriyorum. <span className="text-primary-400 font-semibold">React, Node.js, Python, Unity</span> ve 
-              <span className="text-primary-400 font-semibold"> machine learning</span> konusunda deneyimliyim. 
-              <span className="text-primary-400 font-semibold">Full-stack çözümler</span> ve <span className="text-primary-400 font-semibold">yaratıcı projeler</span> üretiyorum.
-            </p>
+            {/* Enhanced Description with Live Coding Preview */}
+            <div className="space-y-6">
+              <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed animate-fade-in-up-delayed" itemProp="description">
+                <span className="text-primary-400 font-semibold" itemProp="jobTitle">Full Stack Developer</span> olarak 
+                <span className="text-primary-400 font-semibold"> web, mobile ve AI</span> teknolojileriyle 
+                modern uygulamalar geliştiriyorum. <span className="text-primary-400 font-semibold">React, Node.js, Python, Unity</span> ve 
+                <span className="text-primary-400 font-semibold"> machine learning</span> konusunda deneyimliyim. 
+                <span className="text-primary-400 font-semibold">Full-stack çözümler</span> ve <span className="text-primary-400 font-semibold">yaratıcı projeler</span> üretiyorum.
+              </p>
+              
+              {/* Enhanced Live Coding Preview */}
+              <div className="mt-8 bg-dark-800/30 backdrop-blur-sm rounded-xl p-4 border border-primary-500/20 max-w-2xl mx-auto animate-fade-in-scale animate-glow">
+                <div className="flex items-center space-x-2 mb-3">
+                  <div className="flex space-x-1">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+                  </div>
+                  <span className="text-gray-400 text-sm font-mono animate-blink">Terminal</span>
+                </div>
+                <div className="text-left font-mono text-sm space-y-1">
+                  <div className="text-green-400 animate-fade-in-up" style={{animationDelay: '0.5s'}}>
+                    <span className="text-gray-500">const</span> developer = <span className="text-yellow-400">'Erencan'</span>;
+                  </div>
+                  <div className="text-blue-400 animate-fade-in-up" style={{animationDelay: '0.7s'}}>
+                    <span className="text-gray-500">function</span> createAmazing() <span className="text-gray-500">{'{'}</span>
+                  </div>
+                  <div className="text-purple-400 ml-4 animate-fade-in-up" style={{animationDelay: '0.9s'}}>
+                    <span className="text-gray-500">return</span> <span className="text-yellow-400">'Innovation'</span>;
+                  </div>
+                  <div className="text-blue-400 animate-fade-in-up" style={{animationDelay: '1.1s'}}>
+                    <span className="text-gray-500">{'}'}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
-              <Link href="/projects" className="btn-primary group">
-                <span>Projelerimi Keşfet</span>
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            {/* Enhanced CTA Buttons with 3D Effects */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
+              <Link href="/projects" className="btn-primary group relative overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/25">
+                <span className="relative z-10">Projelerimi Keşfet</span>
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
-              <Link href="/contact" className="btn-secondary group">
-                <span>İletişime Geç</span>
-                <Mail className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform duration-300" />
+              <Link href="/contact" className="btn-secondary group relative overflow-hidden transform hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-primary-500/25">
+                <span className="relative z-10">İletişime Geç</span>
+                <Mail className="w-5 h-5 ml-2 group-hover:scale-110 transition-transform duration-300 relative z-10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-primary-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
             </div>
 
-            {/* Social Links */}
-            <div className="flex items-center justify-center space-x-6 mt-8">
+            {/* Enhanced Social Links with Hover Effects */}
+            <div className="flex items-center justify-center space-x-6 mt-12">
+              <Link 
+                href="/api/cv" 
+                className="p-4 bg-dark-800/50 backdrop-blur-sm rounded-full hover:bg-primary-500/20 transition-all duration-300 group hover:scale-110 hover:rotate-12"
+              >
+                <Download className="w-6 h-6 text-gray-400 group-hover:text-primary-400 transition-colors duration-300" />
+              </Link>
               <Link 
                 href="https://github.com/erencanacioglu" 
                 target="_blank"
-                className="p-3 rounded-full bg-dark-800 text-gray-400 hover:text-white hover:bg-primary-600 transition-all duration-300 hover:scale-110 glow-hover"
+                className="p-4 bg-dark-800/50 backdrop-blur-sm rounded-full hover:bg-primary-500/20 transition-all duration-300 group hover:scale-110 hover:-rotate-12"
               >
-                <Github className="w-6 h-6" />
+                <Github className="w-6 h-6 text-gray-400 group-hover:text-primary-400 transition-colors duration-300" />
               </Link>
               <Link 
                 href="https://linkedin.com/in/erencanacioglu" 
                 target="_blank"
-                className="p-3 rounded-full bg-dark-800 text-gray-400 hover:text-white hover:bg-blue-600 transition-all duration-300 hover:scale-110 glow-hover"
+                className="p-4 bg-dark-800/50 backdrop-blur-sm rounded-full hover:bg-primary-500/20 transition-all duration-300 group hover:scale-110 hover:rotate-12"
               >
-                <Linkedin className="w-6 h-6" />
+                <Linkedin className="w-6 h-6 text-gray-400 group-hover:text-primary-400 transition-colors duration-300" />
               </Link>
               <Link 
-                href="mailto:erencanacioglu@gmail.com"
-                className="p-3 rounded-full bg-dark-800 text-gray-400 hover:text-white hover:bg-green-600 transition-all duration-300 hover:scale-110 glow-hover"
+                href="mailto:erencan@erencanacioglu.com"
+                className="p-4 bg-dark-800/50 backdrop-blur-sm rounded-full hover:bg-primary-500/20 transition-all duration-300 group hover:scale-110 hover:-rotate-12"
               >
-                <Mail className="w-6 h-6" />
+                <Mail className="w-6 h-6 text-gray-400 group-hover:text-primary-400 transition-colors duration-300" />
               </Link>
-              <a 
-                href="/api/cv" 
-                className="p-3 rounded-full bg-dark-800 text-gray-400 hover:text-white hover:bg-purple-600 transition-all duration-300 hover:scale-110 glow-hover"
-              >
-                <Download className="w-6 h-6" />
-              </a>
             </div>
           </div>
 
