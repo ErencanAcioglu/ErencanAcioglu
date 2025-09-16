@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import SEOHead from './components/SEOHead'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -71,6 +72,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr" className="scroll-smooth">
+      <head>
+        <SEOHead />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 text-white antialiased`}>
         <div className="relative min-h-screen">
           {/* Background Effects */}
