@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const filePath = join(process.cwd(), 'public', 'cv.pdf')
     const fileBuffer = await readFile(filePath)
     
-    return new NextResponse(fileBuffer, {
+    return new NextResponse(fileBuffer as any, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="ErencanAcicoglu_CV.pdf"',
