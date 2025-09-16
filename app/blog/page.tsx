@@ -103,7 +103,8 @@ AI teknolojileri web geliştirme süreçlerini dönüştürüyor. Developer'lar 
       publishDate: '2025-01-15',
       readTime: '12 min',
       featured: true,
-      image: '/blog/ai-web-development.jpg'
+      image: '/blog/ai-web-development.jpg',
+      views: 1250
     },
     {
       id: 2,
@@ -195,7 +196,8 @@ Next.js 14 ile performans optimizasyonu artık daha kolay. Bu teknikleri uygulay
       publishDate: '2025-01-10',
       readTime: '12 min',
       featured: true,
-      image: '/blog/nextjs-performance.jpg'
+      image: '/blog/nextjs-performance.jpg',
+      views: 980
     },
     {
       id: 3,
@@ -407,7 +409,8 @@ Unity'de AI geliştirme, oyun deneyimini zenginleştiren güçlü bir araçtır.
       publishDate: '2025-01-05',
       readTime: '15 min',
       featured: false,
-      image: '/blog/unity-ai-game.jpg'
+      image: '/blog/unity-ai-game.jpg',
+      views: 750
     },
     {
       id: 4,
@@ -522,7 +525,8 @@ Freelance developer olmak zorlu ama ödüllendirici bir yolculuk. Sabır, sürek
       publishDate: '2024-12-28',
       readTime: '10 min',
       featured: false,
-      image: '/blog/freelance-experience.jpg'
+      image: '/blog/freelance-experience.jpg',
+      views: 650
     },
     {
       id: 5,
@@ -831,7 +835,8 @@ Docker ile full-stack development workflow'u modern yazılım geliştirmenin vaz
       publishDate: '2024-12-20',
       readTime: '14 min',
       featured: true,
-      image: '/blog/docker-workflow.jpg'
+      image: '/blog/docker-workflow.jpg',
+      views: 1100
     },
     {
       id: 6,
@@ -846,7 +851,8 @@ Docker ile full-stack development workflow'u modern yazılım geliştirmenin vaz
       publishDate: '2024-12-15',
       readTime: '11 min',
       featured: false,
-      image: '/blog/typescript-react.jpg'
+      image: '/blog/typescript-react.jpg',
+      views: 890
     },
     {
       id: 7,
@@ -860,7 +866,8 @@ Docker ile full-stack development workflow'u modern yazılım geliştirmenin vaz
       publishDate: '2024-12-10',
       readTime: '15 min',
       featured: true,
-      image: '/blog/unity-mobile-game.jpg'
+      image: '/blog/unity-mobile-game.jpg',
+      views: 920
     },
     {
       id: 8,
@@ -874,7 +881,8 @@ Docker ile full-stack development workflow'u modern yazılım geliştirmenin vaz
       publishDate: '2024-12-05',
       readTime: '13 min',
       featured: false,
-      image: '/blog/nodejs-api.jpg'
+      image: '/blog/nodejs-api.jpg',
+      views: 780
     },
     {
       id: 9,
@@ -888,7 +896,8 @@ Docker ile full-stack development workflow'u modern yazılım geliştirmenin vaz
       publishDate: '2024-11-28',
       readTime: '18 min',
       featured: true,
-      image: '/blog/python-ml.jpg'
+      image: '/blog/python-ml.jpg',
+      views: 1350
     },
     {
       id: 10,
@@ -1127,7 +1136,8 @@ Modern DevOps kültürü, yazılım geliştirme süreçlerini dönüştürüyor.
       publishDate: '2024-11-20',
       readTime: '16 min',
       featured: false,
-      image: '/blog/devops-docker.jpg'
+      image: '/blog/devops-docker.jpg',
+      views: 850
     },
     {
       id: 11,
@@ -1414,7 +1424,8 @@ React 18 ile modern frontend geliştirme artık daha güçlü ve esnek. Concurre
       publishDate: '2024-11-15',
       readTime: '13 min',
       featured: true,
-      image: '/blog/react-18.jpg'
+      image: '/blog/react-18.jpg',
+      views: 1050
     },
     {
       id: 12,
@@ -1694,7 +1705,8 @@ Python ile machine learning, veri bilimi dünyasının en güçlü araçlarında
       publishDate: '2024-11-10',
       readTime: '18 min',
       featured: true,
-      image: '/blog/python-ml.jpg'
+      image: '/blog/python-ml.jpg',
+      views: 1400
     }
   ]
 

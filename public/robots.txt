@@ -1,0 +1,17 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+# Host
+Host: https://erencanacioglu.com
+
+# Sitemaps
+Sitemap: https://erencanacioglu.com/sitemap.xml
