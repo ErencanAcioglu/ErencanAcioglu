@@ -146,13 +146,12 @@ const HomePage = () => {
               >
                 <Mail className="w-6 h-6" />
               </Link>
-              <Link 
-                href="https://www.erencanacioglu.com/cv.pdf" 
-                target="_blank"
+              <a 
+                href="/api/cv" 
                 className="p-3 rounded-full bg-dark-800 text-gray-400 hover:text-white hover:bg-purple-600 transition-all duration-300 hover:scale-110 glow-hover"
               >
                 <Download className="w-6 h-6" />
-              </Link>
+              </a>
             </div>
           </div>
 

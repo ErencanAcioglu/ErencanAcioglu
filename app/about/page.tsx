@@ -253,14 +253,13 @@ const AboutPage = () => {
                 </div>
 
                 {/* Download CV Button */}
-                <Link 
-                  href="https://www.erencanacioglu.com/cv.pdf" 
-                  target="_blank"
+                <a 
+                  href="/api/cv" 
                   className="w-full btn-primary flex items-center justify-center mb-6"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   <span>CV İndir</span>
-                </Link>
+                </a>
 
                 {/* Interests */}
                 <div>
