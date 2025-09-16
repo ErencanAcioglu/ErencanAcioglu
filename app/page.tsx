@@ -90,7 +90,7 @@ const HomePage = () => {
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold">
                 <span className="block text-white mb-2">Merhaba, Ben</span>
-                <span className="block gradient-text" itemProp="name">Ben Erencan Acıoğlu</span>
+                <span className="block gradient-text" itemProp="name">Erencan Acıoğlu</span>
               </h1>
               
               {/* Dynamic Role */}
