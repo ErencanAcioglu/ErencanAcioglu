@@ -156,7 +156,7 @@ const HomePage = () => {
       title: 'YoourCargo',
       description: 'Modern lojistik platformu - Kargo takibi, maliyet yönetimi ve dijital dokümantasyon',
       tech: ['ASP.NET Core', 'React', 'MSSQL', 'SCSS'],
-      link: 'https://youourcargo.com',
+      link: 'https://yoourcargo.com',
       gradient: 'from-blue-500 to-purple-600'
     },
     {

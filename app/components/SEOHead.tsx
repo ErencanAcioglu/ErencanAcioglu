@@ -64,7 +64,7 @@ export default function SEOHead({
             "worksFor": {
               "@type": "Organization",
               "name": "YoourCargo",
-              "url": "https://youourcargo.com"
+              "url": "https://yoourcargo.com"
             },
             "alumniOf": {
               "@type": "CollegeOrUniversity",
@@ -113,7 +113,7 @@ export default function SEOHead({
               {
                 "@type": "Organization",
                 "name": "YoourCargo",
-                "url": "https://youourcargo.com"
+                "url": "https://yoourcargo.com"
               }
             ]
           })
