@@ -35,7 +35,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <img src="/logo.svg" alt="EA Logo" className="w-10 h-10" />
+              <img src="/logo.png" alt="E Logo" className="w-10 h-10" />
             </div>
             <span className="text-xl font-bold gradient-text hidden sm:block">
               Erencan Acıoğlu

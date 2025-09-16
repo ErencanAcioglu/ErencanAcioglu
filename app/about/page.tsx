@@ -254,7 +254,7 @@ const AboutPage = () => {
 
                 {/* Download CV Button */}
                 <Link 
-                  href="/cv.pdf" 
+                  href="https://www.erencanacioglu.com/cv.pdf" 
                   target="_blank"
                   className="w-full btn-primary flex items-center justify-center mb-6"
                 >

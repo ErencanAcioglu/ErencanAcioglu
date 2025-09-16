@@ -215,6 +215,227 @@ const ProjectsPage = () => {
         'Scalable inference infrastructure design'
       ],
       gradient: 'from-emerald-500 to-green-600'
+    },
+    // Mobile Apps
+    {
+      id: 8,
+      title: 'AI-Powered Fitness Tracker',
+      description: 'React Native ile geliştirilmiş akıllı fitness uygulaması. Computer vision ile egzersiz analizi, AI destekli beslenme önerileri ve personalized workout plans ile comprehensive fitness solution.',
+      longDescription: 'Modern mobile fitness uygulaması. Real-time exercise tracking, AI-powered nutrition analysis ve social features ile kullanıcıları fitness hedeflerine ulaştırıyor.',
+      tech: ['React Native', 'Expo', 'TensorFlow Lite', 'Firebase', 'Redux', 'TypeScript', 'Camera API'],
+      category: 'mobile',
+      type: 'Mobile Fitness App',
+      status: 'Live',
+      year: '2024',
+      duration: '5 months',
+      team: 'Mobile Developer',
+      features: [
+        'Computer vision ile real-time exercise tracking',
+        'AI-powered nutrition analysis ve recommendations',
+        'Personalized workout plans ve progress tracking',
+        'Social features ve community challenges',
+        'Offline mode ve data synchronization',
+        'Apple Health ve Google Fit integration'
+      ],
+      challenges: [
+        'Real-time computer vision processing',
+        'Cross-platform performance optimization',
+        'Complex state management ve data sync'
+      ],
+      gradient: 'from-pink-500 to-rose-600',
+      featured: true
+    },
+    {
+      id: 9,
+      title: 'E-Commerce Mobile App',
+      description: 'Flutter ile geliştirilmiş cross-platform e-ticaret uygulaması. AR product visualization, real-time chat support, secure payment integration ve advanced search ile modern shopping experience.',
+      longDescription: 'Modern e-ticaret deneyimi sunan mobile uygulama. AR teknolojisi, AI-powered recommendations ve seamless payment processing ile superior user experience.',
+      tech: ['Flutter', 'Dart', 'Firebase', 'Stripe', 'ARCore', 'Bloc', 'Hive'],
+      category: 'mobile',
+      type: 'E-Commerce Mobile App',
+      status: 'Live',
+      year: '2024',
+      duration: '4 months',
+      team: 'Mobile Developer',
+      features: [
+        'AR product visualization ve try-on',
+        'Real-time chat support ve notifications',
+        'Secure payment processing (Stripe)',
+        'AI-powered product recommendations',
+        'Advanced search ve filtering',
+        'Offline cart ve wishlist functionality'
+      ],
+      challenges: [
+        'AR integration ve performance optimization',
+        'Cross-platform payment processing',
+        'Complex state management ve caching'
+      ],
+      gradient: 'from-indigo-500 to-purple-600'
+    },
+    {
+      id: 10,
+      title: 'Social Media Analytics App',
+      description: 'React Native ile geliştirilmiş sosyal medya analytics uygulaması. Real-time social media monitoring, sentiment analysis, content scheduling ve comprehensive reporting ile influencer marketing solution.',
+      longDescription: 'Sosyal medya hesaplarını yönetmek ve analiz etmek için geliştirilmiş mobile uygulama. AI-powered insights ve automated content management özellikleri.',
+      tech: ['React Native', 'Node.js', 'MongoDB', 'Socket.io', 'Chart.js', 'AWS S3', 'JWT'],
+      category: 'mobile',
+      type: 'Social Media Analytics App',
+      status: 'Live',
+      year: '2024',
+      duration: '3 months',
+      team: 'Full Stack Developer',
+      features: [
+        'Real-time social media monitoring',
+        'AI-powered sentiment analysis',
+        'Content scheduling ve automation',
+        'Comprehensive analytics dashboard',
+        'Multi-platform social media support',
+        'Export reports ve data visualization'
+      ],
+      challenges: [
+        'Real-time data processing ve updates',
+        'Complex analytics calculations',
+        'Multi-platform API integration'
+      ],
+      gradient: 'from-cyan-500 to-blue-600'
+    },
+    // Game Development
+    {
+      id: 11,
+      title: '3D Puzzle Adventure Game',
+      description: 'Unity ile geliştirilmiş 3D puzzle macera oyunu. Physics-based puzzles, immersive 3D environments, dynamic lighting ve multiplayer co-op ile engaging gaming experience.',
+      longDescription: 'Modern 3D puzzle oyunu. Complex physics interactions, beautiful environments ve cooperative gameplay ile players için challenging ve rewarding experience.',
+      tech: ['Unity', 'C#', 'Blender', 'Photon PUN2', 'Unity Analytics', 'Addressables'],
+      category: 'game',
+      type: '3D Puzzle Adventure Game',
+      status: 'Live',
+      year: '2024',
+      duration: '6 months',
+      team: 'Game Developer',
+      features: [
+        'Physics-based puzzle mechanics',
+        'Immersive 3D environments ve lighting',
+        'Multiplayer co-op gameplay',
+        'Dynamic difficulty adjustment',
+        'Achievement system ve progression',
+        'Cross-platform multiplayer support'
+      ],
+      challenges: [
+        'Complex physics simulation optimization',
+        'Multiplayer synchronization',
+        '3D asset optimization ve performance'
+      ],
+      gradient: 'from-amber-500 to-orange-600',
+      featured: true
+    },
+    {
+      id: 12,
+      title: 'Mobile Racing Game',
+      description: 'Unity ile geliştirilmiş mobile racing oyunu. Realistic car physics, dynamic weather system, customizable vehicles ve online leaderboards ile competitive racing experience.',
+      longDescription: 'High-performance mobile racing oyunu. Advanced physics simulation, beautiful graphics ve competitive multiplayer features ile racing enthusiasts için ideal.',
+      tech: ['Unity', 'C#', 'Unity Physics', 'PlayFab', 'Unity Ads', 'Addressables', 'Unity Analytics'],
+      category: 'game',
+      type: 'Mobile Racing Game',
+      status: 'Live',
+      year: '2024',
+      duration: '5 months',
+      team: 'Game Developer',
+      features: [
+        'Realistic car physics ve handling',
+        'Dynamic weather ve day/night cycle',
+        'Customizable vehicles ve upgrades',
+        'Online leaderboards ve tournaments',
+        'Multiple game modes ve tracks',
+        'Social features ve friend challenges'
+      ],
+      challenges: [
+        'Mobile performance optimization',
+        'Realistic physics simulation',
+        'Online multiplayer stability'
+      ],
+      gradient: 'from-red-500 to-pink-600'
+    },
+    {
+      id: 13,
+      title: '2D Platformer Adventure',
+      description: 'Unity ile geliştirilmiş 2D platformer oyunu. Pixel art graphics, smooth character movement, power-up system ve boss battles ile nostalgic gaming experience.',
+      longDescription: 'Retro-style 2D platformer oyunu. Hand-drawn pixel art, fluid animations ve challenging gameplay ile classic platformer fans için perfect experience.',
+      tech: ['Unity', 'C#', 'Aseprite', 'Unity 2D', 'Cinemachine', 'Unity Input System'],
+      category: 'game',
+      type: '2D Platformer Game',
+      status: 'Live',
+      year: '2024',
+      duration: '4 months',
+      team: 'Game Developer',
+      features: [
+        'Hand-drawn pixel art graphics',
+        'Smooth character movement ve animations',
+        'Power-up system ve special abilities',
+        'Challenging boss battles',
+        'Multiple worlds ve levels',
+        'Collectibles ve achievement system'
+      ],
+      challenges: [
+        'Pixel-perfect collision detection',
+        'Smooth 2D animation system',
+        'Level design ve difficulty balancing'
+      ],
+      gradient: 'from-green-500 to-emerald-600'
+    },
+    // Additional AI Projects
+    {
+      id: 14,
+      title: 'Computer Vision Object Detection',
+      description: 'Python ve OpenCV ile geliştirilmiş real-time object detection sistemi. YOLO algoritması, custom model training ve web interface ile comprehensive computer vision solution.',
+      longDescription: 'Advanced computer vision projesi. Real-time object detection, custom model training ve web-based interface ile practical AI application.',
+      tech: ['Python', 'OpenCV', 'YOLO', 'TensorFlow', 'Flask', 'React', 'Docker'],
+      category: 'ai',
+      type: 'Computer Vision System',
+      status: 'Live',
+      year: '2024',
+      duration: '3 months',
+      team: 'AI Developer',
+      features: [
+        'Real-time object detection ve tracking',
+        'Custom model training pipeline',
+        'Web-based interface ve API',
+        'Multiple detection models support',
+        'Batch processing capabilities',
+        'Performance optimization ve GPU support'
+      ],
+      challenges: [
+        'Real-time processing optimization',
+        'Model accuracy improvement',
+        'Web interface performance'
+      ],
+      gradient: 'from-violet-500 to-purple-600'
+    },
+    {
+      id: 15,
+      title: 'Natural Language Processing API',
+      description: 'FastAPI ile geliştirilmiş NLP servisi. Text sentiment analysis, language detection, entity extraction ve text summarization ile comprehensive language processing solution.',
+      longDescription: 'Advanced NLP API servisi. Multiple language processing capabilities, scalable architecture ve easy integration ile developers için powerful language tools.',
+      tech: ['Python', 'FastAPI', 'spaCy', 'Transformers', 'PostgreSQL', 'Redis', 'Docker'],
+      category: 'ai',
+      type: 'NLP API Service',
+      status: 'Live',
+      year: '2024',
+      duration: '4 months',
+      team: 'AI Developer',
+      features: [
+        'Sentiment analysis ve emotion detection',
+        'Multi-language text processing',
+        'Entity extraction ve NER',
+        'Text summarization ve generation',
+        'RESTful API ve documentation',
+        'Scalable microservice architecture'
+      ],
+      challenges: [
+        'Model performance optimization',
+        'Multi-language support',
+        'API scalability ve reliability'
+      ],
+      gradient: 'from-teal-500 to-cyan-600'
     }
   ]
 

@@ -147,7 +147,7 @@ const HomePage = () => {
                 <Mail className="w-6 h-6" />
               </Link>
               <Link 
-                href="/cv.pdf" 
+                href="https://www.erencanacioglu.com/cv.pdf" 
                 target="_blank"
                 className="p-3 rounded-full bg-dark-800 text-gray-400 hover:text-white hover:bg-purple-600 transition-all duration-300 hover:scale-110 glow-hover"
               >
