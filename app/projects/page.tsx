@@ -18,6 +18,8 @@ import {
   Users,
   TrendingUp
 } from 'lucide-react'
+import CVGame from '../components/CVGame'
+import MobileCV from '../components/MobileCV'
 
 const ProjectsPage = () => {
   const [activeFilter, setActiveFilter] = useState('all')
@@ -436,6 +438,35 @@ const ProjectsPage = () => {
         'API scalability ve reliability'
       ],
       gradient: 'from-teal-500 to-cyan-600'
+    },
+    // CV Interactive Game
+    {
+      id: 15,
+      title: 'CV Skill Hunter Game',
+      description: 'Erencan\'ın teknik skillerini yakalama oyunu! React ile geliştirilmiş interaktif CV oyunu. Skill kartlarını yakala, puan topla ve teknik yetenekleri keşfet.',
+      longDescription: 'Eğlenceli ve eğitici CV oyunu. Kullanıcılar Erencan\'ın teknik skillerini oyun formatında öğrenebilir. React, TypeScript ve modern web teknolojileri ile geliştirildi.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Lucide React'],
+      category: 'game',
+      type: 'Interactive CV Game',
+      status: 'Live',
+      year: '2024',
+      duration: '2 weeks',
+      team: 'Solo Developer',
+      features: [
+        'Interactive skill hunting gameplay',
+        'Real-time scoring system',
+        'Responsive design for all devices',
+        'CV information integration',
+        'Mobile-friendly interface',
+        'Educational content delivery'
+      ],
+      challenges: [
+        'Game mechanics implementation',
+        'Responsive design optimization',
+        'Performance optimization for mobile'
+      ],
+      gradient: 'from-purple-500 to-pink-600',
+      featured: true
     }
   ]
 
@@ -675,6 +706,45 @@ const ProjectsPage = () => {
           )}
         </div>
       </section>
+
+      {/* CV Interactive Game Section - Only show when game filter is active */}
+      {activeFilter === 'game' && (
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                <span className="gradient-text">CV Skill Hunter Oyunu</span>
+              </h2>
+              <p className="text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
+                Erencan'ın teknik skillerini yakalama oyunu! Skill kartlarını yakala, puan topla ve 
+                CV'deki yetenekleri eğlenceli bir şekilde keşfet.
+              </p>
+            </div>
+            
+            <CVGame />
+          </div>
+        </section>
+      )}
+
+      {/* Mobile CV Section - Only show when mobile filter is active */}
+      {activeFilter === 'mobile' && (
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-dark-800 via-dark-900 to-dark-800">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+                <span className="gradient-text">Mobil CV Arayüzü</span>
+              </h2>
+              <p className="text-xl text-gray-400 mb-8 max-w-3xl mx-auto">
+                Mobil cihazlarda CV bilgilerini kolayca görüntüleyebileceğiniz interaktif arayüz.
+              </p>
+            </div>
+            
+            <div className="flex justify-center">
+              <MobileCV />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-primary-900/20 to-primary-800/20">

@@ -143,7 +143,7 @@ const AboutPage = () => {
       title: 'YoourCargo',
       description: 'A modern logistics platform developed for Oregon Teknoloji A.Ş. to streamline freight forwarding, shipment tracking, cost management, and digital documentation via a responsive dashboard.',
       tech: ['ASP.NET Core', 'Entity Framework', 'React', 'MSSQL', 'SCSS'],
-      link: 'https://youurcargo.com',
+      link: 'https://yoourcargo.com',
       type: 'Web Platform'
     },
     {
