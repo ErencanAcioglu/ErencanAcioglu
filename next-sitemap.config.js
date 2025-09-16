@@ -12,6 +12,8 @@ module.exports = {
     await config.transform(config, '/projects'),
     await config.transform(config, '/blog'),
     await config.transform(config, '/contact'),
+    await config.transform(config, '/erencan'),
+    await config.transform(config, '/acioglu'),
   ],
   robotsTxtOptions: {
     policies: [
@@ -53,6 +55,12 @@ module.exports = {
 
     // About and projects get medium-high priority
     if (path === '/about' || path === '/projects') {
+      customConfig.priority = 0.9
+      customConfig.changefreq = 'weekly'
+    }
+
+    // Entity pages get high priority for SEO
+    if (path === '/erencan' || path === '/acioglu') {
       customConfig.priority = 0.9
       customConfig.changefreq = 'weekly'
     }

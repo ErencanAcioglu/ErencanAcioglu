@@ -90,7 +90,7 @@ const HomePage = () => {
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold">
                 <span className="block text-white mb-2">Merhaba, Ben</span>
-                <span className="block gradient-text" itemProp="name">Erencan Acıoğlu</span>
+                <span className="block gradient-text" itemProp="name">Ben Erencan Acıoğlu</span>
               </h1>
               
               {/* Dynamic Role */}
@@ -110,6 +110,8 @@ const HomePage = () => {
               modern uygulamalar geliştiriyorum. <span className="text-primary-400 font-semibold">React, Node.js, Python, Unity</span> ve 
               <span className="text-primary-400 font-semibold"> machine learning</span> konusunda deneyimliyim. 
               <span className="text-primary-400 font-semibold">Full-stack çözümler</span> ve <span className="text-primary-400 font-semibold">yaratıcı projeler</span> üretiyorum.
+              <Link href="/erencan" className="text-primary-400 hover:text-primary-300 ml-1">Erencan kimdir?</Link> ve 
+              <Link href="/acioglu" className="text-primary-400 hover:text-primary-300 ml-1">Acıoğlu hakkında</Link> daha fazla bilgi.
             </p>
 
             {/* CTA Buttons */}
