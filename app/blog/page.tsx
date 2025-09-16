@@ -25,6 +25,9 @@ import {
 const BlogPage = () => {
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
+  const [email, setEmail] = useState('')
+  const [isSubscribing, setIsSubscribing] = useState(false)
+  const [subscriptionMessage, setSubscriptionMessage] = useState('')
 
   // Sample blog posts - gerçek uygulamada API'den gelecek
   const blogPosts = [
@@ -1739,6 +1742,37 @@ Python ile machine learning, veri bilimi dünyasının en güçlü araçlarında
     })
   }
 
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setIsSubscribing(true)
+    setSubscriptionMessage('')
+
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setSubscriptionMessage('✅ ' + data.message)
+        setEmail('')
+      } else {
+        setSubscriptionMessage('❌ ' + data.error)
+      }
+    } catch (error) {
+      setSubscriptionMessage('❌ Bir hata oluştu. Lütfen tekrar deneyin.')
+    } finally {
+      setIsSubscribing(false)
+    }
+  }
+
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
@@ -2030,16 +2064,28 @@ Python ile machine learning, veri bilimi dünyasının en güçlü araçlarında
                   <p className="text-gray-400 text-sm mb-4">
                     Yeni yazılarımdan haberdar olmak için e-posta adresinizi bırakın.
                   </p>
-                  <div className="space-y-3">
+                  <form onSubmit={handleSubscribe} className="space-y-3">
                     <input
                       type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="E-posta adresiniz"
                       className="w-full px-3 py-2 bg-dark-800 border border-dark-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
+                      required
                     />
-                    <button className="w-full btn-primary text-sm py-2">
-                      Abone Ol
+                    <button 
+                      type="submit"
+                      disabled={isSubscribing}
+                      className="w-full btn-primary text-sm py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubscribing ? 'Abone Olunuyor...' : 'Abone Ol'}
                     </button>
-                  </div>
+                    {subscriptionMessage && (
+                      <p className={`text-sm ${subscriptionMessage.includes('✅') ? 'text-green-400' : 'text-red-400'}`}>
+                        {subscriptionMessage}
+                      </p>
+                    )}
+                  </form>
                 </div>
               </div>
             </div>
