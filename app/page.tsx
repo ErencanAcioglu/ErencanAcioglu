@@ -110,8 +110,6 @@ const HomePage = () => {
               modern uygulamalar geliştiriyorum. <span className="text-primary-400 font-semibold">React, Node.js, Python, Unity</span> ve 
               <span className="text-primary-400 font-semibold"> machine learning</span> konusunda deneyimliyim. 
               <span className="text-primary-400 font-semibold">Full-stack çözümler</span> ve <span className="text-primary-400 font-semibold">yaratıcı projeler</span> üretiyorum.
-              <Link href="/erencan" className="text-primary-400 hover:text-primary-300 ml-1">Erencan kimdir?</Link> ve 
-              <Link href="/acioglu" className="text-primary-400 hover:text-primary-300 ml-1">Acıoğlu hakkında</Link> daha fazla bilgi.
             </p>
 
             {/* CTA Buttons */}
