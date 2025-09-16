@@ -16,53 +16,77 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Erencan Acıoğlu - Full Stack Developer',
-  description: 'Full Stack Developer specializing in web, mobile, and AI technologies. Building innovative applications with React, Node.js, Python, Unity, and modern development tools.',
-  keywords: ['Erencan Acıoğlu', 'Full Stack Developer', 'React', 'Node.js', 'Python', 'AI', 'Web Development', 'Software Engineer', 'Mobile Development', 'Game Development', 'Machine Learning', 'TypeScript', 'Next.js'],
+  title: 'Erencan Acıoğlu - Full Stack Developer | Web, Mobile & AI Expert',
+  description: 'Erencan Acıoğlu - Full Stack Developer specializing in web, mobile, and AI technologies. Building innovative applications with React, Node.js, Python, Unity, and modern development tools. Based in Istanbul, Turkey.',
+  keywords: ['Erencan Acıoğlu', 'Erencan Acioglu', 'Full Stack Developer', 'React Developer', 'Node.js Developer', 'Python Developer', 'AI Developer', 'Web Development', 'Mobile Development', 'Game Development', 'Machine Learning', 'TypeScript', 'Next.js', 'Unity Developer', 'Software Engineer', 'Istanbul Developer', 'Turkey Developer'],
   authors: [{ name: 'Erencan Acıoğlu', url: 'https://erencanacioglu.com' }],
   creator: 'Erencan Acıoğlu',
   publisher: 'Erencan Acıoğlu',
+  applicationName: 'Erencan Acıoğlu Portfolio',
+  generator: 'Next.js',
+  referrer: 'origin-when-cross-origin',
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
   icons: {
-    icon: '/favicon.png',
+    icon: [
+      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.png', sizes: '16x16', type: 'image/png' }
+    ],
     shortcut: '/favicon.png',
-    apple: '/favicon.png',
+    apple: [
+      { url: '/favicon.png', sizes: '180x180', type: 'image/png' }
+    ],
   },
+  manifest: '/manifest.json',
   openGraph: {
-    title: 'Erencan Acıoğlu - Full Stack Developer',
-    description: 'Full Stack Developer specializing in web, mobile, and AI technologies',
     type: 'website',
     locale: 'tr_TR',
-    url: 'https://erencanacioglu.vercel.app',
+    url: 'https://erencanacioglu.com',
     siteName: 'Erencan Acıoğlu Portfolio',
+    title: 'Erencan Acıoğlu - Full Stack Developer | Web, Mobile & AI Expert',
+    description: 'Full Stack Developer specializing in web, mobile, and AI technologies. Building innovative applications with React, Node.js, Python, Unity, and modern development tools.',
     images: [
       {
-        url: '/logo.svg',
+        url: 'https://erencanacioglu.com/logo.png',
         width: 1200,
         height: 630,
         alt: 'Erencan Acıoğlu - Full Stack Developer',
+        type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Erencan Acıoğlu - Full Stack Developer',
-    description: 'Full Stack Developer specializing in web, mobile, and AI technologies',
-    images: ['/logo.svg'],
+    site: '@erencanacioglu',
+    creator: '@erencanacioglu',
+    title: 'Erencan Acıoğlu - Full Stack Developer | Web, Mobile & AI Expert',
+    description: 'Full Stack Developer specializing in web, mobile, and AI technologies. Building innovative applications with React, Node.js, Python, Unity, and modern development tools.',
+    images: ['https://erencanacioglu.com/logo.png'],
   },
   alternates: {
-    canonical: 'https://erencanacioglu.vercel.app',
+    canonical: 'https://erencanacioglu.com',
+    languages: {
+      'tr-TR': 'https://erencanacioglu.com',
+      'en-US': 'https://erencanacioglu.com/en',
+    },
   },
+  verification: {
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+    yahoo: 'your-yahoo-verification-code',
+  },
+  category: 'technology',
 }
 
 export default function RootLayout({

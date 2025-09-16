@@ -90,7 +90,7 @@ const HomePage = () => {
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold">
                 <span className="block text-white mb-2">Merhaba, Ben</span>
-                <span className="block gradient-text">Erencan Acıoğlu</span>
+                <span className="block gradient-text" itemProp="name">Erencan Acıoğlu</span>
               </h1>
               
               {/* Dynamic Role */}
@@ -104,8 +104,8 @@ const HomePage = () => {
             </div>
 
             {/* Description */}
-            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              <span className="text-primary-400 font-semibold">Full Stack Developer</span> olarak 
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed" itemProp="description">
+              <span className="text-primary-400 font-semibold" itemProp="jobTitle">Full Stack Developer</span> olarak 
               <span className="text-primary-400 font-semibold"> web, mobile ve AI</span> teknolojileriyle 
               modern uygulamalar geliştiriyorum. <span className="text-primary-400 font-semibold">React, Node.js, Python, Unity</span> ve 
               <span className="text-primary-400 font-semibold"> machine learning</span> konusunda deneyimliyim. 
@@ -164,7 +164,7 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8" aria-label="Statistics">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
@@ -184,7 +184,7 @@ const HomePage = () => {
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-800/30">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-dark-800/30" aria-label="Skills">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -213,7 +213,7 @@ const HomePage = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-20 px-4 sm:px-6 lg:px-8" aria-label="Featured Projects">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
