@@ -28,9 +28,6 @@ module.exports = {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    additionalSitemaps: [
-      'https://erencanacioglu.com/sitemap.xml',
-    ],
   },
   transform: async (config, path) => {
     // Custom priority and changefreq for different pages
