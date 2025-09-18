@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { rateLimit, sanitizeInput, validateEmail, validateRequest, securityHeaders } from '../../../lib/security'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -8,11 +9,34 @@ let subscribers: string[] = []
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting (3 istek/dakika) - Geçici olarak devre dışı
+    // const rateLimitCheck = rateLimit(3, 60000)
+    // const { allowed } = rateLimitCheck(request)
+    
+    // if (!allowed) {
+    //   return NextResponse.json(
+    //     { error: 'Çok fazla istek gönderdiniz. Lütfen bir dakika bekleyin.' },
+    //     { status: 429, headers: { 'Retry-After': '60' } }
+    //   )
+    // }
+
+    // Request validation - Geçici olarak devre dışı
+    // const requestValidation = validateRequest(request)
+    // if (!requestValidation.valid) {
+    //   return NextResponse.json(
+    //     { error: 'Geçersiz istek.' },
+    //     { status: 403 }
+    //   )
+    // }
+
     const { email } = await request.json()
 
-    // E-posta doğrulama
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!email || !emailRegex.test(email)) {
+    // Input sanitization - Geçici olarak devre dışı
+    // const sanitizedEmail = sanitizeInput(email || '')
+    const sanitizedEmail = email || ''
+
+    // E-posta doğrulama (gelişmiş)
+    if (!email || !validateEmail(email)) {
       return NextResponse.json(
         { error: 'Geçerli bir e-posta adresi giriniz.' },
         { status: 400 }
@@ -90,7 +114,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { message: 'Abonelik başarıyla oluşturuldu! Onay e-postası gönderildi.' },
-      { status: 200 }
+      { 
+        status: 200,
+        headers: securityHeaders
+      }
     )
 
   } catch (error) {

@@ -30,7 +30,8 @@ const ContactPage = () => {
     message: '',
     projectType: '',
     budget: '',
-    timeline: ''
+    timeline: '',
+    honeypot: '' // Bot koruması için gizli alan
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -134,7 +135,8 @@ const ContactPage = () => {
           message: '',
           projectType: '',
           budget: '',
-          timeline: ''
+          timeline: '',
+          honeypot: ''
         })
       } else {
         setSubmitStatus('error')
@@ -322,6 +324,20 @@ const ContactPage = () => {
                       rows={6}
                       className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 resize-none"
                       placeholder="Projeniz hakkında detaylı bilgi verin. Ne yapmak istiyorsunuz? Hangi özelliklere ihtiyacınız var? Hedef kitleniz kimler?"
+                    />
+                  </div>
+
+                  {/* Honeypot field - Bot koruması için gizli alan */}
+                  <div style={{ display: 'none' }}>
+                    <label htmlFor="honeypot">Bu alanı doldurmayın</label>
+                    <input
+                      type="text"
+                      id="honeypot"
+                      name="honeypot"
+                      value={formData.honeypot}
+                      onChange={handleInputChange}
+                      tabIndex={-1}
+                      autoComplete="off"
                     />
                   </div>
 

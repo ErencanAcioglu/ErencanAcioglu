@@ -1,22 +1,59 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { rateLimit, sanitizeInput, validateEmail, validateHoneypot, validateRequest, securityHeaders } from '../../../lib/security'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, subject, message, projectType, budget, timeline } = await request.json()
+    // Rate limiting (5 istek/dakika)
+    const rateLimitCheck = rateLimit(5, 60000)
+    const { allowed, remaining } = rateLimitCheck(request)
+    
+    if (!allowed) {
+      return NextResponse.json(
+        { error: 'Çok fazla istek gönderdiniz. Lütfen bir dakika bekleyin.' },
+        { status: 429, headers: { 'Retry-After': '60' } }
+      )
+    }
 
-    // E-posta doğrulama
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!email || !emailRegex.test(email)) {
+    // Request validation - Geçici olarak devre dışı
+    // const requestValidation = validateRequest(request)
+    // if (!requestValidation.valid) {
+    //   return NextResponse.json(
+    //     { error: 'Geçersiz istek.' },
+    //     { status: 403 }
+    //   )
+    // }
+
+    const { name, email, subject, message, projectType, budget, timeline, honeypot } = await request.json()
+
+    // Honeypot kontrolü (bot koruması)
+    if (!validateHoneypot(honeypot)) {
+      return NextResponse.json(
+        { error: 'Geçersiz istek.' },
+        { status: 400 }
+      )
+    }
+
+    // Input sanitization
+    const sanitizedName = sanitizeInput(name || '')
+    const sanitizedEmail = sanitizeInput(email || '')
+    const sanitizedSubject = sanitizeInput(subject || '')
+    const sanitizedMessage = sanitizeInput(message || '')
+    const sanitizedProjectType = sanitizeInput(projectType || '')
+    const sanitizedBudget = sanitizeInput(budget || '')
+    const sanitizedTimeline = sanitizeInput(timeline || '')
+
+    // E-posta doğrulama (gelişmiş)
+    if (!email || !validateEmail(email)) {
       return NextResponse.json(
         { error: 'Geçerli bir e-posta adresi giriniz.' },
         { status: 400 }
       )
     }
 
-    if (!name || !subject || !message) {
+    if (!sanitizedName || !sanitizedSubject || !sanitizedMessage) {
       return NextResponse.json(
         { error: 'Ad, konu ve mesaj alanları zorunludur.' },
         { status: 400 }
@@ -27,7 +64,7 @@ export async function POST(request: NextRequest) {
     await resend.emails.send({
       from: 'Erencan Acıoğlu <onboarding@resend.dev>',
       to: ['erencanacioglu8@gmail.com'],
-      subject: `Yeni Proje Önerisi: ${subject}`,
+      subject: `Yeni Proje Önerisi: ${sanitizedSubject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
           <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
@@ -35,24 +72,24 @@ export async function POST(request: NextRequest) {
           </div>
           
           <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <h2 style="color: #333; margin-bottom: 20px;">${subject}</h2>
+            <h2 style="color: #333; margin-bottom: 20px;">${sanitizedSubject}</h2>
             
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #333; margin-top: 0;">İletişim Bilgileri:</h3>
-              <p style="color: #666; margin: 5px 0;"><strong>Ad Soyad:</strong> ${name}</p>
-              <p style="color: #666; margin: 5px 0;"><strong>E-posta:</strong> ${email}</p>
-              ${projectType ? `<p style="color: #666; margin: 5px 0;"><strong>Proje Türü:</strong> ${projectType}</p>` : ''}
-              ${budget ? `<p style="color: #666; margin: 5px 0;"><strong>Bütçe:</strong> ${budget}</p>` : ''}
-              ${timeline ? `<p style="color: #666; margin: 5px 0;"><strong>Zaman Çizelgesi:</strong> ${timeline}</p>` : ''}
+              <p style="color: #666; margin: 5px 0;"><strong>Ad Soyad:</strong> ${sanitizedName}</p>
+              <p style="color: #666; margin: 5px 0;"><strong>E-posta:</strong> ${sanitizedEmail}</p>
+              ${sanitizedProjectType ? `<p style="color: #666; margin: 5px 0;"><strong>Proje Türü:</strong> ${sanitizedProjectType}</p>` : ''}
+              ${sanitizedBudget ? `<p style="color: #666; margin: 5px 0;"><strong>Bütçe:</strong> ${sanitizedBudget}</p>` : ''}
+              ${sanitizedTimeline ? `<p style="color: #666; margin: 5px 0;"><strong>Zaman Çizelgesi:</strong> ${sanitizedTimeline}</p>` : ''}
             </div>
             
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #333; margin-top: 0;">Proje Detayları:</h3>
-              <p style="color: #666; line-height: 1.6; margin: 0;">${message}</p>
+              <p style="color: #666; line-height: 1.6; margin: 0;">${sanitizedMessage}</p>
             </div>
             
             <div style="text-align: center; margin: 30px 0;">
-              <a href="mailto:${email}" 
+              <a href="mailto:${sanitizedEmail}" 
                  style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                         color: white; 
                         padding: 12px 30px; 
@@ -75,7 +112,7 @@ export async function POST(request: NextRequest) {
     // Müşteriye onay e-postası gönder
     await resend.emails.send({
       from: 'Erencan Acıoğlu <onboarding@resend.dev>',
-      to: [email],
+      to: [sanitizedEmail],
       subject: 'Proje Öneriniz Alındı - Erencan Acıoğlu',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f8f9fa;">
@@ -84,7 +121,7 @@ export async function POST(request: NextRequest) {
           </div>
           
           <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-            <h2 style="color: #333; margin-bottom: 20px;">Merhaba ${name}!</h2>
+            <h2 style="color: #333; margin-bottom: 20px;">Merhaba ${sanitizedName}!</h2>
             
             <p style="color: #666; line-height: 1.6; margin-bottom: 20px;">
               Proje öneriniz başarıyla alındı! En kısa sürede size geri dönüş yapacağım.
@@ -92,8 +129,8 @@ export async function POST(request: NextRequest) {
             
             <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #333; margin-top: 0;">Öneriniz:</h3>
-              <p style="color: #666; margin: 5px 0;"><strong>Konu:</strong> ${subject}</p>
-              <p style="color: #666; margin: 5px 0;"><strong>Mesaj:</strong> ${message}</p>
+              <p style="color: #666; margin: 5px 0;"><strong>Konu:</strong> ${sanitizedSubject}</p>
+              <p style="color: #666; margin: 5px 0;"><strong>Mesaj:</strong> ${sanitizedMessage}</p>
             </div>
             
             <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -132,7 +169,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { message: 'Proje öneriniz başarıyla gönderildi! En kısa sürede size geri dönüş yapacağım.' },
-      { status: 200 }
+      { 
+        status: 200,
+        headers: securityHeaders
+      }
     )
 
   } catch (error) {

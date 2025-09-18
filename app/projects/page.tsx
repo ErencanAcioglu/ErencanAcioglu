@@ -441,7 +441,7 @@ const ProjectsPage = () => {
     },
     // CV Interactive Game
     {
-      id: 15,
+      id: 16,
       title: 'CV Skill Hunter Game',
       description: 'Erencan\'ın teknik skillerini yakalama oyunu! React ile geliştirilmiş interaktif CV oyunu. Skill kartlarını yakala, puan topla ve teknik yetenekleri keşfet.',
       longDescription: 'Eğlenceli ve eğitici CV oyunu. Kullanıcılar Erencan\'ın teknik skillerini oyun formatında öğrenebilir. React, TypeScript ve modern web teknolojileri ile geliştirildi.',

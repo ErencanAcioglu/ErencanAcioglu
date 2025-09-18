@@ -1,12 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { rateLimit, sanitizeInput, validateRequest, securityHeaders } from '../../../lib/security'
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting (10 istek/dakika) - Geçici olarak devre dışı
+    // const rateLimitCheck = rateLimit(10, 60000)
+    // const { allowed } = rateLimitCheck(request)
+    
+    // if (!allowed) {
+    //   return NextResponse.json(
+    //     { response: 'Çok fazla istek gönderdiniz. Lütfen bir dakika bekleyin.' },
+    //     { status: 429, headers: { 'Retry-After': '60' } }
+    //   )
+    // }
+
+    // Request validation - Geçici olarak devre dışı
+    // const requestValidation = validateRequest(request)
+    // if (!requestValidation.valid) {
+    //   return NextResponse.json(
+    //     { response: 'Geçersiz istek.' },
+    //     { status: 403 }
+    //   )
+    // }
+
     const { message } = await request.json()
 
     if (!message) {
-      return NextResponse.json({ error: 'Message is required' }, { status: 400 })
+      return NextResponse.json({ response: 'Message is required' }, { status: 400 })
     }
+
+    // Input sanitization - Geçici olarak devre dışı
+    // const sanitizedMessage = sanitizeInput(message)
+    const sanitizedMessage = message
 
     // Gemini API key kontrolü
     const apiKey = process.env.GEMINI_API_KEY
@@ -69,7 +94,7 @@ GÖREVİN:
 - Türkçe yanıt ver
 - Kısa ve öz yanıtlar ver
 
-Kullanıcı sorusu: ${message}
+Kullanıcı sorusu: ${sanitizedMessage}
 `
 
     // Gemini API çağrısı
@@ -100,7 +125,10 @@ Kullanıcı sorusu: ${message}
     const data = await response.json()
     const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Üzgünüm, yanıt veremiyorum.'
 
-    return NextResponse.json({ response: aiResponse })
+    return NextResponse.json(
+      { response: aiResponse },
+      { headers: securityHeaders }
+    )
 
   } catch (error) {
     console.error('Chat API error:', error)

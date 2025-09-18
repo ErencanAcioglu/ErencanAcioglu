@@ -4,7 +4,18 @@ import { useTheme } from '../contexts/ThemeContext'
 import { Sun, Moon } from 'lucide-react'
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
+  // Güvenli theme hook kullanımı
+  let theme = 'dark'
+  let toggleTheme = () => {}
+  
+  try {
+    const themeContext = useTheme()
+    theme = themeContext.theme
+    toggleTheme = themeContext.toggleTheme
+  } catch (error) {
+    // ThemeProvider bulunamadığında varsayılan değerleri kullan
+    console.warn('ThemeProvider not found, using default theme')
+  }
 
   const handleClick = () => {
     console.log('Theme toggle clicked! Current theme:', theme)
