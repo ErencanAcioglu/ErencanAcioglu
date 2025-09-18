@@ -145,7 +145,7 @@ const AboutPage = () => {
       tech: ['ASP.NET Core', 'Entity Framework', 'React', 'MSSQL', 'SCSS'],
       link: 'https://yoourcargo.com',
       type: 'Web Platform'
-    },
+    },  
     {
       title: 'TUAS Web Platform',
       description: 'Developed a corporate website for TUAS Teknoloji A.Ş. with responsive UI components, dynamic content modules, and form handling. Delivered full-stack functionality with SEO optimization.',

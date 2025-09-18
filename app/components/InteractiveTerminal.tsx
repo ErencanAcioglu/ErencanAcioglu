@@ -267,36 +267,47 @@ const InteractiveTerminal = () => {
   }, [history])
 
   return (
-    <div className="bg-black/90 backdrop-blur-sm rounded-lg border border-green-500/20 shadow-2xl max-w-4xl mx-auto">
+    <div className="backdrop-blur-sm rounded-lg shadow-2xl max-w-4xl mx-auto transition-all duration-500" style={{
+      backgroundColor: 'var(--bg-secondary)',
+      borderColor: 'var(--border-color)',
+      border: '1px solid'
+    }}>
       {/* Terminal Header */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-800/50 rounded-t-lg border-b border-green-500/20">
+      <div className="flex items-center justify-between px-4 py-2 rounded-t-lg border-b transition-all duration-500" style={{
+        backgroundColor: 'var(--bg-tertiary)',
+        borderColor: 'var(--border-color)'
+      }}>
         <div className="flex items-center space-x-2">
           <div className="flex space-x-1">
             <div className="w-3 h-3 rounded-full bg-red-500"></div>
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          <span className="text-green-400 font-mono text-sm">Terminal</span>
+          <span className="font-mono text-sm transition-colors duration-500" style={{ color: 'var(--text-primary)' }}>Terminal</span>
         </div>
         <div className="flex items-center space-x-2">
-          <Terminal className="w-4 h-4 text-green-400" />
-          <span className="text-green-400 font-mono text-xs">v1.0.0</span>
+          <Terminal className="w-4 h-4 transition-colors duration-500" style={{ color: 'var(--text-primary)' }} />
+          <span className="font-mono text-xs transition-colors duration-500" style={{ color: 'var(--text-primary)' }}>v1.0.0</span>
         </div>
       </div>
 
       {/* Terminal Body */}
       <div 
         ref={terminalRef}
-        className="h-96 overflow-y-auto p-4 font-mono text-sm bg-black/50"
+        className="h-96 overflow-y-auto p-4 font-mono text-sm transition-all duration-500"
+        style={{
+          backgroundColor: 'var(--bg-primary)',
+          color: 'var(--text-primary)'
+        }}
         onClick={() => inputRef.current?.focus()}
       >
         {history.map((line, index) => (
           <div key={index} className="mb-1">
             {line.type === 'input' && (
-              <div className="text-green-400">{line.content}</div>
+              <div className="transition-colors duration-500" style={{ color: 'var(--text-primary)' }}>{line.content}</div>
             )}
             {line.type === 'output' && (
-              <div className="text-gray-300">{line.content}</div>
+              <div className="transition-colors duration-500" style={{ color: 'var(--text-secondary)' }}>{line.content}</div>
             )}
             {line.type === 'error' && (
               <div className="text-red-400">{line.content}</div>
@@ -306,24 +317,28 @@ const InteractiveTerminal = () => {
         
         {/* Current Input Line */}
         <div className="flex items-center">
-          <span className="text-green-400 mr-2">$</span>
+          <span className="mr-2 transition-colors duration-500" style={{ color: 'var(--text-primary)' }}>$</span>
           <input
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="bg-transparent text-gray-300 outline-none flex-1 font-mono"
+            className="bg-transparent outline-none flex-1 font-mono transition-colors duration-500"
+            style={{ color: 'var(--text-primary)' }}
             placeholder="Type a command..."
             autoFocus
           />
-          {showCursor && <span className="text-green-400 animate-blink">|</span>}
+          {showCursor && <span className="animate-blink transition-colors duration-500" style={{ color: 'var(--text-primary)' }}>|</span>}
         </div>
       </div>
 
       {/* Terminal Footer */}
-      <div className="px-4 py-2 bg-gray-800/50 rounded-b-lg border-t border-green-500/20">
-        <div className="flex items-center justify-between text-xs text-gray-400">
+      <div className="px-4 py-2 rounded-b-lg border-t transition-all duration-500" style={{
+        backgroundColor: 'var(--bg-tertiary)',
+        borderColor: 'var(--border-color)'
+      }}>
+        <div className="flex items-center justify-between text-xs transition-colors duration-500" style={{ color: 'var(--text-muted)' }}>
           <span>Press ↑↓ for command history</span>
           <span>Type 'help' for commands</span>
         </div>
