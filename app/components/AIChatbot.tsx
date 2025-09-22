@@ -13,6 +13,7 @@ interface Message {
 
 const AIChatbot = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [showWelcomePopup, setShowWelcomePopup] = useState(true)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -25,6 +26,13 @@ const AIChatbot = () => {
   const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { theme } = useTheme()
+
+  // Welcome popup'ı chat açılana kadar göster
+  useEffect(() => {
+    if (isOpen) {
+      setShowWelcomePopup(false)
+    }
+  }, [isOpen])
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -98,10 +106,37 @@ const AIChatbot = () => {
 
   return (
     <>
+      {/* Welcome Popup - Chat butonunun hemen üstünde, sağ alt köşede */}
+      {showWelcomePopup && !isOpen && (
+        <div 
+          onClick={() => setIsOpen(true)}
+          className="fixed bottom-20 right-6 z-40 max-w-xs sm:max-w-sm sm:bottom-16 sm:right-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white p-4 rounded-lg shadow-2xl animate-bounce cursor-pointer hover:scale-105 transition-transform duration-200"
+        >
+          <div className="flex items-center space-x-2">
+            <Bot className="w-5 h-5 flex-shrink-0" />
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-sm">Merhaba! 👋</p>
+              <p className="text-xs opacity-90">Ben Erencan'ın AI asistanıyım. Size nasıl yardımcı olabilirim?</p>
+            </div>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                setShowWelcomePopup(false)
+              }}
+              className="ml-2 text-white/70 hover:text-white flex-shrink-0"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          {/* Ok işareti - chat butonuna işaret ediyor */}
+          <div className="absolute -bottom-2 right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-primary-500"></div>
+        </div>
+      )}
+
       {/* Floating Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 group"
+        className="fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 group sm:bottom-4 sm:right-4"
         style={{
           backgroundColor: 'var(--bg-secondary)',
           borderColor: 'var(--border-color)',
@@ -117,11 +152,13 @@ const AIChatbot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-96 h-96 rounded-xl shadow-2xl transition-all duration-300" style={{
+        <div className="fixed bottom-24 right-6 z-50 w-96 h-96 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-96 lg:h-96 rounded-xl shadow-2xl transition-all duration-300 max-w-[calc(100vw-3rem)] max-h-[calc(100vh-8rem)] sm:bottom-20 sm:right-4 sm:w-auto sm:h-auto sm:max-w-none sm:max-h-[calc(100vh-6rem)]" style={{
           backgroundColor: 'var(--bg-secondary)',
           borderColor: 'var(--border-color)',
           border: '1px solid'
         }}>
+          {/* Chat window'a da ok işareti ekleyelim */}
+          <div className="absolute -bottom-2 right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-primary-500"></div>
           {/* Chat Header */}
           <div className="flex items-center justify-between p-4 border-b rounded-t-xl" style={{
             backgroundColor: 'var(--bg-tertiary)',
